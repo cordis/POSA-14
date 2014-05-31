@@ -1,5 +1,6 @@
 package edu.vuum.mocca;
 
+import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.concurrent.locks.Lock;
 
@@ -23,7 +24,7 @@ class SimpleAtomicLong
 
     // TODO -- you fill in here by replacing the null with an
     // initialization of ReentrantReadWriteLock.
-    private final ReentrantReadWriteLock mRWLock = null;
+    private final ReadWriteLock mRWLock = new ReentrantReadWriteLock();
 
     /**
      * Creates a new SimpleAtomicLong with the given initial value.
@@ -31,6 +32,7 @@ class SimpleAtomicLong
     public SimpleAtomicLong(long initialValue)
     {
         // TODO -- you fill in here
+        mValue = initialValue;
     }
 
     /**
@@ -41,8 +43,10 @@ class SimpleAtomicLong
     public long get()
     {
         long value;
-
         // TODO -- you fill in here
+        mRWLock.readLock().lock();
+        value = mValue;
+        mRWLock.readLock().unlock();
 
         return value;
     }
@@ -57,6 +61,9 @@ class SimpleAtomicLong
         long value = 0;
 
         // TODO -- you fill in here
+        mRWLock.writeLock().lock();
+        value = --mValue;
+        mRWLock.writeLock().unlock();
 
         return value;
     }
@@ -71,6 +78,9 @@ class SimpleAtomicLong
         long value = 0;
 
         // TODO -- you fill in here
+        mRWLock.writeLock().lock();
+        value = mValue++;
+        mRWLock.writeLock().unlock();
 
         return value;
     }
@@ -85,6 +95,9 @@ class SimpleAtomicLong
         long value = 0;
 
         // TODO -- you fill in here
+        mRWLock.writeLock().lock();
+        value = mValue--;
+        mRWLock.writeLock().unlock();
 
         return value;
     }
@@ -99,8 +112,10 @@ class SimpleAtomicLong
         long value = 0;
 
         // TODO -- you fill in here
+        mRWLock.writeLock().lock();
+        value = ++mValue;
+        mRWLock.writeLock().unlock();
 
         return value;
     }
 }
-
