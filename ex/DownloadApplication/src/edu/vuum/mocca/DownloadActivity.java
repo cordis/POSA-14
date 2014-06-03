@@ -148,7 +148,7 @@ public class DownloadActivity extends Activity {
      *        handleMessage() hook method to process Messages sent to
      *        it from the DownloadService.
      */
-    private class DownloadHandler extends Handler {
+    private static class DownloadHandler extends Handler {
         /**
          * Allows Activity to be garbage collected properly.
          */
@@ -166,10 +166,16 @@ public class DownloadActivity extends Activity {
         }
 
         /**
+        /**
          * This hook method is dispatched in response to receiving
          * the pathname back from the DownloadService.
          */
         public void handleMessage(Message msg) {
+            DownloadActivity activity = mActivity.get();
+            // Bail out of the DownloadActivity is gone.
+            if (activity == null)
+                return;
+
             // Extract the data from Message, which is in the form
             // of a Bundle that can be passed across processes.
             Bundle data = msg.getData();
@@ -179,13 +185,13 @@ public class DownloadActivity extends Activity {
                 
             // See if things worked or not.
             if (msg.arg1 != RESULT_OK || pathname == null)
-                mActivity.get().showDialog("failed download");
+                activity.showDialog("failed download");
 
             // Stop displaying the progress dialog.
-            dismissDialog();
+            activity.dismissDialog();
 
             // Display the image in the UI Thread.
-            mActivity.get().displayImage(BitmapFactory.decodeFile(pathname));
+            activity.displayImage(BitmapFactory.decodeFile(pathname));
         }
     };
 

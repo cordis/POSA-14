@@ -1,4 +1,4 @@
-package edu.vuum.mooca;
+package edu.vuum.mocca;
 
 // Import the necessary Java synchronization and scheduling classes.
 import java.util.concurrent.CountDownLatch;
@@ -46,6 +46,19 @@ public class PingPongRight {
         private int mMaxLoopIterations = 0;
 
         /**
+         * String to print (either "ping!" or "pong"!) for each
+         * iteration.
+         */
+        // TODO - You fill in here.
+
+        /**
+         * Two SimpleSemaphores use to alternate pings and pongs.  You
+         * can use an array of SimpleSemaphores or just define them as
+         * two data members.
+         */
+        // TODO - You fill in here.
+
+        /**
          * Constructor initializes the data member(s).
          */
         public PlayPingPongThread(String stringToPrint,
@@ -82,19 +95,6 @@ public class PingPongRight {
         void release() {
             // TODO fill in here
         }
-
-        /**
-         * String to print (either "ping!" or "pong"!) for each
-         * iteration.
-         */
-        // TODO - You fill in here.
-
-        /**
-         * Two SimpleSemaphores use to alternate pings and pongs.  You
-         * can use an array of SimpleSemaphores or just define them as
-         * two data members.
-         */
-        // TODO - You fill in here.
     }
 
     /**
@@ -134,8 +134,8 @@ public class PingPongRight {
         // TODO - Initiate the ping and pong threads, which will call
         // the run() hook method.
 
-        // TODO - replace the following line with a CountDownLatch
-        // barrier synchronizer call that waits for both threads to
+        // TODO - replace the following line with a barrier
+        // synchronizer call to mLatch that waits for both threads to
         // finish.
         throw new java.lang.InterruptedException();
 
