@@ -1,4 +1,4 @@
-package edu.vuum.mooca;
+package edu.vuum.mocca;
 
 import static org.junit.Assert.fail;
 

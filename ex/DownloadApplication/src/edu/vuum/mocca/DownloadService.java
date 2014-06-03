@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.ref.WeakReference;
 import java.net.URL;
 
 import android.app.Activity;
@@ -71,7 +70,7 @@ public class DownloadService extends Service
     }
 
     /**
-     * @class DownloadHandler
+     * @class ServiceHandler
      *
      * @brief An inner class that inherits from Handler and uses its
      *        handleMessage() hook method to process Messages sent to
@@ -80,23 +79,13 @@ public class DownloadService extends Service
      */
     private final class ServiceHandler extends Handler {
         /**
-         * Allows Activity to be garbage collected properly.
-         */
-        private WeakReference<DownloadService> mService;
-
-        /**
-         * Class constructor constructs mActivity as weak reference
-         * to the activity
+         * Class constructor initializes the Looper.
          * 
          * @param Looper
          *            The Looper that we borrow from HandlerThread.
-         * @param service
-         *            The corresponding service
          */
-    	public ServiceHandler(Looper looper, DownloadService service) {
+    	public ServiceHandler(Looper looper) {
             super(looper);
-            mService =
-                new WeakReference<DownloadService>(service);
     	}
 
         /**
@@ -146,7 +135,7 @@ public class DownloadService extends Service
                                             intent.getData().toString());
 
             // Call factory method to create Message.
-            Message message = makeMessage(pathname);
+            Message message = makeReplyMessage(pathname);
         
             // Extract the Messenger.
             Messenger messenger = (Messenger)
@@ -263,8 +252,8 @@ public class DownloadService extends Service
         
         // Get the HandlerThread's Looper and use it for our Handler.
         mServiceLooper = thread.getLooper();
-        mServiceHandler = new ServiceHandler(mServiceLooper, 
-                                             this);
+        mServiceHandler =
+            new ServiceHandler(mServiceLooper);
     }
 
     /**
