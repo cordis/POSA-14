@@ -51,7 +51,7 @@ public class SimpleSemaphore
         }
     };
 
-    private IInterruptStrategy mNonInterruptableStrategy = new IInterruptStrategy()
+    private IInterruptStrategy mNonInterruptibleStrategy = new IInterruptStrategy()
     {
         @Override
         public void lock(Lock lock) throws InterruptedException {
@@ -92,7 +92,7 @@ public class SimpleSemaphore
     {
         // TODO - you fill in here.
         try {
-            acquireWithStrategy(mNonInterruptableStrategy);
+            acquireWithStrategy(mNonInterruptibleStrategy);
         }
         catch (InterruptedException e) {
             // pass: Never get here
@@ -120,9 +120,13 @@ public class SimpleSemaphore
     {
         // TODO - you fill in here.
         mLock.writeLock().lock();
-        mResourceCount += 1;
-        mHasResource.signal();
-        mLock.writeLock().unlock();
+        try {
+            mResourceCount += 1;
+            mHasResource.signal();
+        }
+        finally {
+            mLock.writeLock().unlock();
+        }
     }
 
     /**

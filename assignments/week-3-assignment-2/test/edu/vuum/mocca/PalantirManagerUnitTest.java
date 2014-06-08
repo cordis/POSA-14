@@ -1,5 +1,6 @@
 package edu.vuum.mocca;
 
+import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
@@ -53,6 +54,8 @@ public class PalantirManagerUnitTest {
      * implementation is "fair".
      */
     static FairnessChecker mFairnessChecker = null;
+
+    private Boolean mFailed = false;
 
     /**
      * Runnable passed to each Thread that uses a Palantir. 
@@ -236,7 +239,7 @@ public class PalantirManagerUnitTest {
                             System.out.println(t 
                                                + " throws exception: " 
                                                + e);
-                            failed = true;
+                            mFailed = true;
                         }
                     });
                 t.start();
@@ -250,7 +253,7 @@ public class PalantirManagerUnitTest {
                 iterator.next().join();
 
             // Make sure we haven't failed.
-            assertFalse(failed);
+            assertFalse(mFailed);
 
             if (diagnosticsEnabled)            
                 System.out.println("Finishing PalantirManagerTest");
