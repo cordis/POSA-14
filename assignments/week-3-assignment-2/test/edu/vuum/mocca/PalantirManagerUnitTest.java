@@ -2,6 +2,7 @@ package edu.vuum.mocca;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.fail;
+import static org.junit.Assert.assertFalse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,11 @@ public class PalantirManagerUnitTest {
      * Total number of active Threads.
      */
     static volatile long mMaxActiveThreads = 0;
+
+    /**
+     * Keep track of whether a runtime exception occurs.
+     */
+    boolean mFailed = false;
 
     /**
      * Count of the number of Active Threads.
@@ -220,9 +226,6 @@ public class PalantirManagerUnitTest {
             // Create an object that attempts to check whether the
             // Semaphore implementation is "fair".
             mFairnessChecker = new FairnessChecker(palantirUsers.size());
-
-            // We'll be optimisitic ;-)
-            boolean failed = false;
 
             // Start all the Threads that Middle-Earth Beings use to
             // gaze into the Palantir.

@@ -1,21 +1,30 @@
-Programming Assignment 4
+Week 5: Programming Assignment 4
+
+Released Monday, June 9th, 2014
+Due Monday, June 24th, 2014
 
 In this assignment, you will implement a program that uses a
-pattern-oriented framework to spawn threads that correctly alternate
-printing "Ping" and "Pong", respectively on either the command-line
-display (of the Eclipse IDE) or in an Android TextView (in either the
-AVD emulator or on an actual Android device).  In this directory
-you'll find Java source code, AndroidManifest.xml, and associated XML
-metadata files.  The src/edu/vuum/mocca/ directory contains the
-skeleton Java code that you'll implement by completing the "TODO - You
-fill in here" comments to provide a working solution.  DO NOT CHANGE
-THE OVERALL STRUCTURE OF THE SKELETON - just fill in the "TODO - You
-fill in here" portions!!!
+pattern-oriented ping-pong framework to spawn threads that correctly
+alternate printing "Ping" and "Pong", respectively on either the
+command-line display (of the Eclipse IDE) or in an Android TextView
+(in either the AVD emulator or on an actual Android device).
+
+In this directory you'll find Java source code, AndroidManifest.xml,
+and associated XML metadata files.  The directory
+W5-A4-Android/src/edu/vuum/mocca/ contains the skeleton Java code that
+you'll implement by completing the "TODO - You fill in here" comments
+to provide a working solution.  DO NOT CHANGE THE OVERALL STRUCTURE OF
+THE SKELETON - just fill in the "TODO - You fill in here" portions!!!
+
+Although there's a lot of files, the actual amount of code you'll need
+to write is small - the main goal is to understand the
+pattern-oriented ping-pong framework and how to apply the the Android
+HaMeR framework.
 
 In particular, you'll need to do the following:
 
-. Read & understand the PingPongThreadSema PingPongThreadCond classes,
-  which are covered in these videos:
+. Read & understand the PingPongThreadSema and PingPongThreadCond
+  classes, which are covered in these videos:
   
   Section 1: Module 2: Part 10: Java Synchronization and Schedule Example
 
@@ -29,8 +38,8 @@ In particular, you'll need to do the following:
 
 . Implement the hook methods in the AndroidPlatformStrategy.java class
   that use a Java CountDownLatch and Activity's runOnUiThread() method
-  to post a Runnable command to the UI Thread, which are covered
-  in these videos:
+  to post a Runnable command to the UI Thread, which are covered in
+  these videos:
 
   Section 1: Module 2: Part 9: Java CountDownLatch
   Section 1: Module 2: Part 10: Java Synchronization and Scheduling Example
@@ -44,13 +53,7 @@ In particular, you'll need to do the following:
   Section 1: Module 3: Part 3: Overview of Android Handler
   Section 1: Module 3: Part 4: Posting and Processing Runnables to Android Handler
 
-Note, at the moment, all these videos are available in the YouTube
-playlist at
-
-https://www.youtube.com/playlist?list=PLZ9NgFYEMxp4tbiFYip6tDNIEBRUDyPQK
- 
-When the 2014 POSA MOOC officially starts these videos will be
-available at
+These videos are available at
 
 https://class.coursera.org/posa-002/lecture
 
@@ -61,8 +64,10 @@ in item #38 at the POSA MOOC FAQ available from
 http://www.courera.org/course/posa
 
 You'll need to build this Android application in the Eclipse ADT
-environment.  The correct solution should look like this (for both the
-Eclipse command-line and Android versions):
+environment.  By default, the output for the correct solution should
+look similar to this (for both the Eclipse command-line and Android
+versions): However this assignment is only asking you to create the
+Android version.
 
 Ready...Set...Go!
 Ping!(1)
@@ -87,8 +92,14 @@ Ping!(10)
 Pong!(10)
 Done!
 
+To Run the Android Application, right click on the 'W5-A4-Android'
+project and select [Run As] -> [Android Application]
 
+To Run the Android Unit Test, right click on the 'W5-A4-Android-Test'
+project and select [Run As] -> [Android Unit Test]
 
+This test assumes that each line of text is formatted: <text content>
++ '\n'
 
 
 
